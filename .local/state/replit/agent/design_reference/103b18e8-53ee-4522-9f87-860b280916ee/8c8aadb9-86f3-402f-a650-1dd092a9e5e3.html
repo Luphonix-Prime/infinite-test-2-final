@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Jobs Solutions - Connecting Talent with Opportunities</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/heroicons@2.0.18/24/outline/index.js" type="module"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neon-blue': '#00D4FF',
+                        'hot-pink': '#FF006E',
+                        'glass-white': 'rgba(255, 255, 255, 0.1)',
+                        'glass-border': 'rgba(255, 255, 255, 0.2)'
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif']
+                    },
+                    backdropBlur: {
+                        'xs': '2px'
+                    },
+                    animation: {
+                        'gradient': 'gradient 15s ease infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'slide-up': 'slideUp 0.8s ease-out forwards',
+                        'slide-in-left': 'slideInLeft 0.8s ease-out forwards',
+                        'slide-in-right': 'slideInRight 0.8s ease-out forwards'
+                    },
+                    keyframes: {
+                        gradient: {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(50px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        slideInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-50px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        slideInRight: {
+                            '0%': { opacity: '0', transform: 'translateX(50px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #00D4FF, #FF006E);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-bg {
+            background: linear-gradient(-45deg, #00D4FF, #FF006E, #00D4FF, #FF006E);
+            background-size: 400% 400%;
+        }
+        .animated-bg {
+            background: linear-gradient(-45deg, rgba(0, 212, 255, 0.1), rgba(255, 0, 110, 0.1), rgba(0, 212, 255, 0.1), rgba(255, 0, 110, 0.1));
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        .hover-glow:hover {
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.3);
+            transform: translateY(-5px);
+        }
+        .service-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 212, 255, 0.2);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .nav-item {
+            position: relative;
+            overflow: hidden;
+        }
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: linear-gradient(90deg, #00D4FF, #FF006E);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        .nav-item:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-black text-white font-inter overflow-x-hidden">
+    <!-- @COMPONENT: NavigationHeader -->
+    <nav class="fixed top-0 w-full z-50 glass-dark">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-neon-blue to-hot-pink rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-lg">IJS</span>
+                    </div>
+                    <span class="text-xl font-bold">Infinite Jobs Solutions</span>
+                </div>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-item text-white hover:text-neon-blue transition-colors duration-300 pb-2">Home</a>
+                    <div class="relative group">
+                        <button class="nav-item text-white hover:text-neon-blue transition-colors duration-300 pb-2 flex items-center">
+                            Company
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="absolute top-full left-0 mt-2 w-48 glass-effect rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                            <a href="#about" class="block px-4 py-3 hover:bg-white hover:bg-opacity-10 rounded-t-lg">About Us</a>
+                            <a href="#services" class="block px-4 py-3 hover:bg-white hover:bg-opacity-10 rounded-b-lg">Our Services</a>
+                        </div>
+                    </div>
+                    <a href="#process" class="nav-item text-white hover:text-neon-blue transition-colors duration-300 pb-2">Process</a>
+                    <a href="#contact" class="nav-item text-white hover:text-neon-blue transition-colors duration-300 pb-2">Contact</a>
+                </div>
+
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden glass-effect">
+            <div class="px-6 py-4 space-y-3">
+                <a href="#home" class="block text-white hover:text-neon-blue transition-colors">Home</a>
+                <a href="#about" class="block text-white hover:text-neon-blue transition-colors">About Us</a>
+                <a href="#services" class="block text-white hover:text-neon-blue transition-colors">Our Services</a>
+                <a href="#process" class="block text-white hover:text-neon-blue transition-colors">Process</a>
+                <a href="#contact" class="block text-white hover:text-neon-blue transition-colors">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <!-- @END_COMPONENT: NavigationHeader -->
+
+    <!-- @COMPONENT: HeroSection -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center animated-bg">
+        <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+        <!-- Modern office workspace with glass buildings and technology setup -->
+        <div class="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=1080');"></div>
+        
+        <div class="relative z-10 text-center px-6 max-w-6xl mx-auto">
+            <div class="animate-slide-up">
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
+                    <span class="gradient-text">Infinite</span>
+                    <br>
+                    <span class="text-white">Job Solutions</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                    Connecting Talent with Opportunities
+                </p>
+                <p class="text-lg text-gray-400 mb-12 max-w-2xl mx-auto">
+                    We bridge the gap between exceptional talent and incredible opportunities, 
+                    creating perfect matches that drive success for both candidates and companies.
+                </p>
+            </div>
+            
+            <div class="animate-slide-up flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <button class="gradient-bg px-8 py-4 rounded-full text-white font-semibold text-lg hover-glow transition-all duration-300 animate-gradient">
+                    View Openings
+                </button>
+                <button class="glass-effect px-8 py-4 rounded-full text-white font-semibold text-lg hover-glow transition-all duration-300">
+                    Hire Talent
+                </button>
+            </div>
+        </div>
+
+        <!-- Floating Elements -->
+        <div class="absolute top-1/4 left-10 w-20 h-20 glass-effect rounded-full animate-float hidden lg:block"></div>
+        <div class="absolute bottom-1/4 right-10 w-16 h-16 glass-effect rounded-lg animate-float animation-delay-1000 hidden lg:block"></div>
+        <div class="absolute top-1/3 right-1/4 w-12 h-12 glass-effect rounded-full animate-float animation-delay-2000 hidden lg:block"></div>
+    </section>
+    <!-- @END_COMPONENT: HeroSection -->
+
+    <!-- @COMPONENT: TestimonialSlider -->
+    <section class="py-20 bg-gradient-to-b from-black to-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-slide-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                    What Our <span class="gradient-text">Clients Say</span>
+                </h2>
+                <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                    Success stories from companies and candidates who found their perfect match
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- @MAP: testimonials.map(testimonial => ( -->
+                <div class="glass-effect rounded-2xl p-8 hover-glow service-card">
+                    <div class="flex items-center mb-6">
+                        <div class="w-5 h-5 text-neon-blue mr-2">
+                            <svg fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                            </svg>
+                        </div>
+                        <div class="flex text-neon-blue">
+                            <span>★★★★★</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">
+                        "Infinite Jobs Solutions transformed our hiring process. Their precision in matching candidates to our culture and requirements is unmatched."
+                    </p>
+                    <!-- Professional business executive in a modern office setting -->
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150" alt="Professional business executive" class="w-12 h-12 rounded-full mr-4 object-cover" data-mock="true">
+                        <div>
+                            <p class="font-semibold" data-bind="testimonial.name">Sarah Johnson</p>
+                            <p class="text-sm text-gray-400" data-bind="testimonial.position">CEO, TechCorp</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-effect rounded-2xl p-8 hover-glow service-card">
+                    <div class="flex items-center mb-6">
+                        <div class="w-5 h-5 text-hot-pink mr-2">
+                            <svg fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                            </svg>
+                        </div>
+                        <div class="flex text-hot-pink">
+                            <span>★★★★★</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">
+                        "They didn't just find me a job, they found me my dream career. The support throughout the process was exceptional."
+                    </p>
+                    <!-- Young professional woman smiling in business attire -->
+                    <div class="flex items-center">
+                        <img src="https://pixabay.com/get/g7ea6c021040301f3b84e22a307763ddb022112815f395a203e266b43c25da7eaa109a5e4acaa8e1871fecf4c52e3d0e1d80bfa94f1e0bbd59d47be842df90ec4_1280.jpg" alt="Young professional woman" class="w-12 h-12 rounded-full mr-4 object-cover" data-mock="true">
+                        <div>
+                            <p class="font-semibold" data-bind="testimonial.name">Maria Rodriguez</p>
+                            <p class="text-sm text-gray-400" data-bind="testimonial.position">Software Developer</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-effect rounded-2xl p-8 hover-glow service-card">
+                    <div class="flex items-center mb-6">
+                        <div class="w-5 h-5 text-neon-blue mr-2">
+                            <svg fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
+                            </svg>
+                        </div>
+                        <div class="flex text-neon-blue">
+                            <span>★★★★★</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-6 italic">
+                        "Outstanding service for bulk hiring. They managed to find 50+ qualified candidates within our tight deadline."
+                    </p>
+                    <!-- Middle-aged business professional in a suit -->
+                    <div class="flex items-center">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&h=150" alt="Middle-aged business professional" class="w-12 h-12 rounded-full mr-4 object-cover" data-mock="true">
+                        <div>
+                            <p class="font-semibold" data-bind="testimonial.name">David Chen</p>
+                            <p class="text-sm text-gray-400" data-bind="testimonial.position">HR Director, GlobalTech</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- @END_MAP )) -->
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: TestimonialSlider -->
+
+    <!-- @COMPONENT: AboutUsSection -->
+    <section id="about" class="py-20 bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="max-w-6xl mx-auto">
+                <div class="text-center mb-16 animate-slide-up">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                        About <span class="gradient-text">Infinite Jobs Solutions</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg max-w-3xl mx-auto">
+                        We are a leading recruitment agency dedicated to creating meaningful connections between exceptional talent and forward-thinking companies.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-12 mb-20">
+                    <div class="text-center animate-slide-in-left">
+                        <div class="w-20 h-20 mx-auto mb-6 glass-effect rounded-full flex items-center justify-center">
+                            <div class="w-10 h-10 text-neon-blue">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Our Mission</h3>
+                        <p class="text-gray-400">
+                            To revolutionize the recruitment industry by leveraging technology, expertise, and human insight to create perfect career matches that drive mutual success.
+                        </p>
+                    </div>
+
+                    <div class="text-center animate-slide-up">
+                        <div class="w-20 h-20 mx-auto mb-6 glass-effect rounded-full flex items-center justify-center">
+                            <div class="w-10 h-10 text-hot-pink">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Our Vision</h3>
+                        <p class="text-gray-400">
+                            To become the global leader in talent acquisition, known for our innovative approach, exceptional service, and commitment to creating sustainable career partnerships.
+                        </p>
+                    </div>
+
+                    <div class="text-center animate-slide-in-right">
+                        <div class="w-20 h-20 mx-auto mb-6 glass-effect rounded-full flex items-center justify-center">
+                            <div class="w-10 h-10 text-neon-blue">
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                                </svg>
+                            </div>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Core Values</h3>
+                        <p class="text-gray-400">
+                            Integrity, Excellence, Innovation, and Empathy guide everything we do. We believe in building lasting relationships based on trust, transparency, and mutual respect.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Team Section -->
+                <div class="text-center mb-12">
+                    <h3 class="text-3xl md:text-4xl font-bold mb-6">
+                        Meet Our <span class="gradient-text">Expert Team</span>
+                    </h3>
+                    <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+                        Our diverse team of recruitment specialists brings years of industry experience and passion for connecting great people with great opportunities.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-4 gap-8">
+                    <!-- @MAP: teamMembers.map(member => ( -->
+                    <!-- Professional business woman in executive attire -->
+                    <div class="text-center group">
+                        <div class="relative mb-6 mx-auto w-48 h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300" alt="Professional business woman executive" class="w-full h-full object-cover rounded-2xl glass-effect transition-transform duration-300 group-hover:scale-105" data-mock="true">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent rounded-2xl opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2" data-bind="member.name">Alexandra Smith</h4>
+                        <p class="text-hot-pink text-sm mb-2" data-bind="member.role">CEO & Founder</p>
+                        <p class="text-gray-400 text-sm" data-bind="member.experience">15+ years experience</p>
+                    </div>
+
+                    <!-- Professional business man in suit -->
+                    <div class="text-center group">
+                        <div class="relative mb-6 mx-auto w-48 h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300" alt="Professional business man in suit" class="w-full h-full object-cover rounded-2xl glass-effect transition-transform duration-300 group-hover:scale-105" data-mock="true">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent rounded-2xl opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2" data-bind="member.name">Michael Johnson</h4>
+                        <p class="text-neon-blue text-sm mb-2" data-bind="member.role">Head of IT Recruitment</p>
+                        <p class="text-gray-400 text-sm" data-bind="member.experience">12+ years experience</p>
+                    </div>
+
+                    <!-- Professional woman recruiter -->
+                    <div class="text-center group">
+                        <div class="relative mb-6 mx-auto w-48 h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300" alt="Professional woman recruiter" class="w-full h-full object-cover rounded-2xl glass-effect transition-transform duration-300 group-hover:scale-105" data-mock="true">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent rounded-2xl opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2" data-bind="member.name">Emily Chen</h4>
+                        <p class="text-hot-pink text-sm mb-2" data-bind="member.role">Senior Recruitment Consultant</p>
+                        <p class="text-gray-400 text-sm" data-bind="member.experience">8+ years experience</p>
+                    </div>
+
+                    <!-- Professional man in business casual -->
+                    <div class="text-center group">
+                        <div class="relative mb-6 mx-auto w-48 h-48 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=300" alt="Professional man in business casual" class="w-full h-full object-cover rounded-2xl glass-effect transition-transform duration-300 group-hover:scale-105" data-mock="true">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent rounded-2xl opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
+                        </div>
+                        <h4 class="text-xl font-semibold mb-2" data-bind="member.name">James Williams</h4>
+                        <p class="text-neon-blue text-sm mb-2" data-bind="member.role">Bulk Hiring Specialist</p>
+                        <p class="text-gray-400 text-sm" data-bind="member.experience">10+ years experience</p>
+                    </div>
+                    <!-- @END_MAP )) -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: AboutUsSection -->
+
+    <!-- @COMPONENT: ServicesSection -->
+    <section id="services" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-slide-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                    Our <span class="gradient-text">Services</span>
+                </h2>
+                <p class="text-gray-400 text-lg max-w-3xl mx-auto">
+                    Comprehensive recruitment solutions tailored to meet your unique hiring needs across all industries and experience levels.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <!-- @MAP: services.map(service => ( -->
+                <div class="glass-effect rounded-3xl p-8 service-card group">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-neon-blue to-hot-pink rounded-2xl flex items-center justify-center mr-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold group-hover:text-neon-blue transition-colors">IT Recruitment</h3>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Specialized in finding top-tier technology professionals including software developers, data scientists, cybersecurity experts, and IT leadership roles. We understand the technical landscape and can identify the perfect fit for your tech stack.
+                    </p>
+                    <ul class="text-sm text-gray-300 space-y-2">
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-neon-blue rounded-full mr-3"></span>
+                            Software Development & Engineering
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-neon-blue rounded-full mr-3"></span>
+                            Data Science & Analytics
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-neon-blue rounded-full mr-3"></span>
+                            Cybersecurity & Infrastructure
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-neon-blue rounded-full mr-3"></span>
+                            Product Management & UX/UI Design
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="glass-effect rounded-3xl p-8 service-card group">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-hot-pink to-neon-blue rounded-2xl flex items-center justify-center mr-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold group-hover:text-hot-pink transition-colors">Non-IT Recruitment</h3>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Comprehensive recruitment services across all traditional industries including healthcare, finance, marketing, sales, operations, and executive leadership. We match professionals to roles that align with their career aspirations.
+                    </p>
+                    <ul class="text-sm text-gray-300 space-y-2">
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-hot-pink rounded-full mr-3"></span>
+                            Sales & Marketing Professionals
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-hot-pink rounded-full mr-3"></span>
+                            Finance & Accounting
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-hot-pink rounded-full mr-3"></span>
+                            Healthcare & Life Sciences
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-hot-pink rounded-full mr-3"></span>
+                            Executive & C-Suite Leadership
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="glass-effect rounded-3xl p-8 service-card group">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-neon-blue to-hot-pink rounded-2xl flex items-center justify-center mr-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold group-hover:text-neon-blue transition-colors">Internship Hiring</h3>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Connecting bright, ambitious students and recent graduates with meaningful internship opportunities. We focus on creating valuable learning experiences that benefit both interns and host organizations.
+                    </p>
+                    <ul class="text-sm text-gray-300 space-y-2">
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-neon-blue rounded-full mr-3"></span>
+                            Summer & Semester Programs
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-neon-blue rounded-full mr-3"></span>
+                            Technical & Business Internships
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-neon-blue rounded-full mr-3"></span>
+                            Graduate Trainee Programs
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-neon-blue rounded-full mr-3"></span>
+                            Industry-Academia Partnerships
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="glass-effect rounded-3xl p-8 service-card group">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-br from-hot-pink to-neon-blue rounded-2xl flex items-center justify-center mr-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold group-hover:text-hot-pink transition-colors">Bulk Hiring Solutions</h3>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Scalable recruitment solutions for companies experiencing rapid growth or seasonal staffing needs. Our streamlined process ensures quality hires even when recruiting large numbers of candidates simultaneously.
+                    </p>
+                    <ul class="text-sm text-gray-300 space-y-2">
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-hot-pink rounded-full mr-3"></span>
+                            Rapid Scale Recruitment
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-hot-pink rounded-full mr-3"></span>
+                            Campus Recruitment Drives
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-hot-pink rounded-full mr-3"></span>
+                            Project-Based Staffing
+                        </li>
+                        <li class="flex items-center">
+                            <span class="w-2 h-2 bg-hot-pink rounded-full mr-3"></span>
+                            Seasonal & Contract Hiring
+                        </li>
+                    </ul>
+                </div>
+                <!-- @END_MAP )) -->
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: ServicesSection -->
+
+    <!-- @COMPONENT: ProcessSection -->
+    <section id="process" class="py-20 bg-gradient-to-b from-gray-900 to-black">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-slide-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                    Our <span class="gradient-text">Process</span>
+                </h2>
+                <p class="text-gray-400 text-lg max-w-3xl mx-auto">
+                    A proven, systematic approach to recruitment that ensures we find the perfect match between talent and opportunity, every single time.
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto">
+                <!-- @MAP: processSteps.map((step, index) => ( -->
+                <div class="flex flex-col md:flex-row items-center mb-12 animate-slide-up">
+                    <div class="flex-shrink-0 mb-6 md:mb-0 md:mr-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-neon-blue to-hot-pink rounded-full flex items-center justify-center text-white font-bold text-xl">
+                            1
+                        </div>
+                    </div>
+                    <div class="glass-effect rounded-3xl p-8 flex-1 hover-glow service-card">
+                        <h3 class="text-2xl font-bold mb-4 flex items-center">
+                            <svg class="w-8 h-8 text-neon-blue mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v8a2 2 0 002 2h2m0-12V3a2 2 0 012-2h2a2 2 0 012 2v2m-2 0a2 2 0 012 2v8a2 2 0 01-2 2H9a2 2 0 01-2-2V7a2 2 0 012-2z"/>
+                            </svg>
+                            Requirement Gathering
+                        </h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            We start by deeply understanding your company culture, specific role requirements, technical needs, and growth objectives. This comprehensive analysis ensures we target the right candidates from the outset.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row-reverse items-center mb-12 animate-slide-up">
+                    <div class="flex-shrink-0 mb-6 md:mb-0 md:ml-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-hot-pink to-neon-blue rounded-full flex items-center justify-center text-white font-bold text-xl">
+                            2
+                        </div>
+                    </div>
+                    <div class="glass-effect rounded-3xl p-8 flex-1 hover-glow service-card">
+                        <h3 class="text-2xl font-bold mb-4 flex items-center">
+                            <svg class="w-8 h-8 text-hot-pink mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                            Screening
+                        </h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            Our expert team conducts thorough candidate screening including technical assessments, behavioral interviews, and cultural fit evaluation. We use advanced tools and proven methodologies to identify top performers.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center mb-12 animate-slide-up">
+                    <div class="flex-shrink-0 mb-6 md:mb-0 md:mr-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-neon-blue to-hot-pink rounded-full flex items-center justify-center text-white font-bold text-xl">
+                            3
+                        </div>
+                    </div>
+                    <div class="glass-effect rounded-3xl p-8 flex-1 hover-glow service-card">
+                        <h3 class="text-2xl font-bold mb-4 flex items-center">
+                            <svg class="w-8 h-8 text-neon-blue mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                            </svg>
+                            Interviewing
+                        </h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            We facilitate structured interviews between shortlisted candidates and your hiring team. Our consultants provide guidance throughout the process and ensure both parties have all necessary information for informed decisions.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row-reverse items-center mb-12 animate-slide-up">
+                    <div class="flex-shrink-0 mb-6 md:mb-0 md:ml-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-hot-pink to-neon-blue rounded-full flex items-center justify-center text-white font-bold text-xl">
+                            4
+                        </div>
+                    </div>
+                    <div class="glass-effect rounded-3xl p-8 flex-1 hover-glow service-card">
+                        <h3 class="text-2xl font-bold mb-4 flex items-center">
+                            <svg class="w-8 h-8 text-hot-pink mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            Selection
+                        </h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            We assist in the final selection process by providing detailed candidate evaluations, reference checks, and negotiation support. Our goal is to ensure a smooth transition from interview to job offer acceptance.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row items-center animate-slide-up">
+                    <div class="flex-shrink-0 mb-6 md:mb-0 md:mr-8">
+                        <div class="w-20 h-20 bg-gradient-to-br from-neon-blue to-hot-pink rounded-full flex items-center justify-center text-white font-bold text-xl">
+                            5
+                        </div>
+                    </div>
+                    <div class="glass-effect rounded-3xl p-8 flex-1 hover-glow service-card">
+                        <h3 class="text-2xl font-bold mb-4 flex items-center">
+                            <svg class="w-8 h-8 text-neon-blue mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>
+                            </svg>
+                            Onboarding
+                        </h3>
+                        <p class="text-gray-400 leading-relaxed">
+                            Our relationship doesn't end with placement. We provide ongoing support during the onboarding process, ensuring smooth integration and addressing any concerns that arise during the initial employment period.
+                        </p>
+                    </div>
+                </div>
+                <!-- @END_MAP )) -->
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: ProcessSection -->
+
+    <!-- @COMPONENT: ContactSection -->
+    <section id="contact" class="py-20 bg-black">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 animate-slide-up">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">
+                    Get In <span class="gradient-text">Touch</span>
+                </h2>
+                <p class="text-gray-400 text-lg max-w-3xl mx-auto">
+                    Ready to find your next great hire or dream job? Contact us today and let's start building your success story together.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <!-- Contact Form -->
+                <div class="glass-effect rounded-3xl p-8">
+                    <h3 class="text-2xl font-bold mb-6">Send Us a Message</h3>
+                    <form class="space-y-6" data-implementation="Should handle form submission and validation">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="firstName" class="block text-sm font-medium mb-2 text-gray-300">First Name</label>
+                                <input type="text" id="firstName" name="firstName" class="w-full px-4 py-3 bg-glass-white border border-glass-border rounded-xl focus:outline-none focus:ring-2 focus:ring-neon-blue focus:border-transparent text-white placeholder-gray-400 transition-all duration-300" placeholder="John" data-mock="true">
+                            </div>
+                            <div>
+                                <label for="lastName" class="block text-sm font-medium mb-2 text-gray-300">Last Name</label>
+                                <input type="text" id="lastName" name="lastName" class="w-full px-4 py-3 bg-glass-white border border-glass-border rounded-xl focus:outline-none focus:ring-2 focus:ring-neon-blue focus:border-transparent text-white placeholder-gray-400 transition-all duration-300" placeholder="Doe" data-mock="true">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium mb-2 text-gray-300">Email Address</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-glass-white border border-glass-border rounded-xl focus:outline-none focus:ring-2 focus:ring-neon-blue focus:border-transparent text-white placeholder-gray-400 transition-all duration-300" placeholder="john.doe@example.com" data-mock="true">
+                        </div>
+
+                        <div>
+                            <label for="phone" class="block text-sm font-medium mb-2 text-gray-300">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 bg-glass-white border border-glass-border rounded-xl focus:outline-none focus:ring-2 focus:ring-neon-blue focus:border-transparent text-white placeholder-gray-400 transition-all duration-300" placeholder="+1 (555) 123-4567" data-mock="true">
+                        </div>
+
+                        <div>
+                            <label for="service" class="block text-sm font-medium mb-2 text-gray-300">Service Interest</label>
+                            <select id="service" name="service" class="w-full px-4 py-3 bg-glass-white border border-glass-border rounded-xl focus:outline-none focus:ring-2 focus:ring-neon-blue focus:border-transparent text-white transition-all duration-300" data-mock="true">
+                                <option value="">Select a service</option>
+                                <option value="it-recruitment">IT Recruitment</option>
+                                <option value="non-it-recruitment">Non-IT Recruitment</option>
+                                <option value="internship-hiring">Internship Hiring</option>
+                                <option value="bulk-hiring">Bulk Hiring Solutions</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="message" class="block text-sm font-medium mb-2 text-gray-300">Message</label>
+                            <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 bg-glass-white border border-glass-border rounded-xl focus:outline-none focus:ring-2 focus:ring-neon-blue focus:border-transparent text-white placeholder-gray-400 resize-none transition-all duration-300" placeholder="Tell us about your recruitment needs..." data-mock="true"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full gradient-bg px-8 py-4 rounded-xl text-white font-semibold text-lg hover-glow transition-all duration-300 animate-gradient" data-event="click:handleSubmit">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Information & Map -->
+                <div class="space-y-8">
+                    <div class="glass-effect rounded-3xl p-8">
+                        <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-gradient-to-br from-neon-blue to-hot-pink rounded-xl flex items-center justify-center mr-4">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Office Address</p>
+                                    <p class="text-gray-400" data-bind="company.address">123 Business Plaza, Tech District, San Francisco, CA 94105</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-gradient-to-br from-neon-blue to-hot-pink rounded-xl flex items-center justify-center mr-4">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Phone Number</p>
+                                    <p class="text-gray-400" data-bind="company.phone">+1 (555) 123-4567</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-gradient-to-br from-neon-blue to-hot-pink rounded-xl flex items-center justify-center mr-4">
+                                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <p class="font-semibold">Email Address</p>
+                                    <p class="text-gray-400" data-bind="company.email">contact@infinitejobsolutions.com</p>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                                <button class="flex-1 gradient-bg px-6 py-3 rounded-xl text-white font-semibold hover-glow transition-all duration-300 flex items-center justify-center">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                    </svg>
+                                    Call Now
+                                </button>
+                                <button class="flex-1 glass-effect px-6 py-3 rounded-xl text-white font-semibold hover-glow transition-all duration-300 flex items-center justify-center">
+                                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+                                    </svg>
+                                    WhatsApp
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Map -->
+                    <div class="glass-effect rounded-3xl p-8">
+                        <h3 class="text-2xl font-bold mb-6">Find Us</h3>
+                        <div class="w-full h-64 bg-gray-800 rounded-xl flex items-center justify-center">
+                            <!-- TODO: Integrate Google Maps API -->
+                            <p class="text-gray-400">Google Maps Integration</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- @END_COMPONENT: ContactSection -->
+
+    <!-- @COMPONENT: FloatingContactButton -->
+    <div class="fixed bottom-8 right-8 z-40">
+        <button class="w-16 h-16 gradient-bg rounded-full shadow-lg hover-glow animate-pulse-slow transition-all duration-300 flex items-center justify-center group">
+            <svg class="w-8 h-8 text-white group-hover:scale-110 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+            </svg>
+        </button>
+    </div>
+    <!-- @END_COMPONENT: FloatingContactButton -->
+
+    <!-- @COMPONENT: Footer -->
+    <footer class="bg-gray-900 border-t border-gray-800 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-br from-neon-blue to-hot-pink rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-lg">IJS</span>
+                        </div>
+                        <span class="text-xl font-bold">Infinite Jobs Solutions</span>
+                    </div>
+                    <p class="text-gray-400 mb-4 max-w-md">
+                        Connecting exceptional talent with incredible opportunities. Your success is our mission.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 glass-effect rounded-lg flex items-center justify-center hover-glow transition-all duration-300">
+                            <svg class="w-5 h-5 text-neon-blue" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 glass-effect rounded-lg flex items-center justify-center hover-glow transition-all duration-300">
+                            <svg class="w-5 h-5 text-hot-pink" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 glass-effect rounded-lg flex items-center justify-center hover-glow transition-all duration-300">
+                            <svg class="w-5 h-5 text-neon-blue" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Services</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#services" class="hover:text-neon-blue transition-colors">IT Recruitment</a></li>
+                        <li><a href="#services" class="hover:text-neon-blue transition-colors">Non-IT Recruitment</a></li>
+                        <li><a href="#services" class="hover:text-neon-blue transition-colors">Internship Hiring</a></li>
+                        <li><a href="#services" class="hover:text-neon-blue transition-colors">Bulk Hiring</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Company</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#about" class="hover:text-neon-blue transition-colors">About Us</a></li>
+                        <li><a href="#process" class="hover:text-neon-blue transition-colors">Our Process</a></li>
+                        <li><a href="#contact" class="hover:text-neon-blue transition-colors">Contact</a></li>
+                        <li><a href="#" class="hover:text-neon-blue transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">
+                    © 2024 Infinite Jobs Solutions. All rights reserved. | Connecting Talent with Opportunities.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!-- @END_COMPONENT: Footer -->
+
+    <script>
+        (function() {
+            // Mobile menu functionality
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        const headerOffset = 80;
+                        const elementPosition = target.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // Add scroll-based animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-slide-up');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animation
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Form submission handler placeholder
+            const contactForm = document.querySelector('form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // TODO: Implement form submission logic
+                    console.log('Form submitted - implement actual submission logic');
+                    alert('Thank you for your message! We\'ll get back to you soon.');
+                });
+            }
+
+            // Floating contact button functionality
+            const floatingBtn = document.querySelector('.fixed button');
+            if (floatingBtn) {
+                floatingBtn.addEventListener('click', function() {
+                    document.getElementById('contact').scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
