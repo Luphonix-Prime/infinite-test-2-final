@@ -14,7 +14,13 @@ export default defineConfig({
   root: path.resolve(__dirname, "client"),
   build: {
     outDir: "../dist",
-    emptyOutDir: true
+    emptyOutDir: true,
+    sourcemap: true,
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, "client", "index.html"),
+      },
+    }
   },
   server: {
     host: "0.0.0.0",

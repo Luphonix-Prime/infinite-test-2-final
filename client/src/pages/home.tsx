@@ -221,6 +221,24 @@ export default function Home() {
                     <p className="text-gray-400 text-sm">Comprehensive evaluation of skills and cultural fit</p>
                   </div>
                 </div>
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 rounded-full bg-[#FFD700] bg-opacity-20 flex items-center justify-center">
+                    <span className="text-[#FFD700] font-bold">4</span>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold mb-1">Selection & Negotiation</h4>
+                    <p className="text-gray-400 text-sm">Final evaluation and offer negotiation support</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 rounded-full bg-[#9D4EDD] bg-opacity-20 flex items-center justify-center">
+                    <span className="text-[#9D4EDD] font-bold">5</span>
+                  </div>
+                  <div>
+                    <h4 className="text-lg font-semibold mb-1">Onboarding Support</h4>
+                    <p className="text-gray-400 text-sm">Seamless integration and follow-up support</p>
+                  </div>
+                </div>
               </div>
             </motion.div>
 

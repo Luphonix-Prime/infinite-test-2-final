@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import images from "@/assets/images/logo.png"
 
 // Assuming Button component is available and imported correctly
 // import { Button } from "@/components/ui/button"; // Example import
@@ -26,9 +27,11 @@ export default function Navigation() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-[#00D4FF] to-[#FF006E] rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm md:text-lg">IJS</span>
-            </div>
+            <img 
+              src={images} 
+              alt="Infinite Jobs Solutions" 
+              className="w-8 h-8 md:w-12 md:h-12 object-contain"
+            />
             <span className="text-lg md:text-xl font-bold hidden sm:block">Infinite Jobs Solutions</span>
             <span className="text-lg md:text-xl font-bold sm:hidden">IJS</span>
           </Link>

@@ -7,20 +7,26 @@ async function throwIfResNotOk(res: Response) {
   }
 }
 
-export async function apiRequest(
-  method: string,
-  url: string,
-  data?: unknown | undefined,
-): Promise<Response> {
-  const res = await fetch(url, {
-    method,
-    headers: data ? { "Content-Type": "application/json" } : {},
-    body: data ? JSON.stringify(data) : undefined,
-    credentials: "include",
+export async function apiRequest<T>(
+  path: string,
+  options: RequestInit = {},
+): Promise<T> {
+  // Use the full URL to your hosted PHP file
+  const response = await fetch('https://infinitejobssolutions.com/contact.php', {
+    method: 'POST',
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      ...options.headers,
+    },
   });
 
-  await throwIfResNotOk(res);
-  return res;
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data.error || 'Failed to submit form');
+  }
+  return data;
 }
 
 type UnauthorizedBehavior = "returnNull" | "throw";

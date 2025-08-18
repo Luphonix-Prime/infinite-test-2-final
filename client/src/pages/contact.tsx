@@ -62,8 +62,43 @@ export default function Contact() {
     },
   });
 
-  const onSubmit = (data: InsertContact) => {
-    mutation.mutate(data);
+  const onSubmit = async (data: InsertContact) => {
+    try {
+      const response = await fetch("https://infinitejobssolutions.com/send_contact.php", {
+        // Note: removed extra 's' from jobssolutions
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+  
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+  
+      const result = await response.json();
+  
+      if (result.success) {
+        toast({
+          title: "Message sent successfully!",
+          description: "We'll get back to you soon.",
+        });
+        form.reset();
+      } else {
+        toast({
+          title: "Error sending message",
+          description: result.error || "Please try again later.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error sending message",
+        description: "Failed to send message. Please try again later.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -243,7 +278,9 @@ export default function Contact() {
                     </div>
                     <div>
                       <p className="font-semibold">Office Address</p>
-                      <p className="text-gray-400">123 Business Plaza, Tech District, San Francisco, CA 94105</p>
+                      <p className="text-gray-400">30 North Gould Street
+Sheridan, WY 380054, United States
+</p>
                     </div>
                   </div>
 
@@ -263,7 +300,7 @@ export default function Contact() {
                     </div>
                     <div>
                       <p className="font-semibold">Email Address</p>
-                      <p className="text-gray-400">contact@infinitejobsolutions.com</p>
+                      <p className="text-gray-400">contact@infinitejobssolutions.com</p>
                     </div>
                   </div>
 
@@ -293,7 +330,7 @@ export default function Contact() {
                 <h3 className="text-2xl font-bold mb-6">Find Us</h3>
                 <div className="w-full h-64 bg-gray-800 rounded-xl flex items-center justify-center">
                   <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.019284398157!2d-122.39877368468208!3d37.79178997975853!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085807cc290c9e1%3A0x3e1fcdb8b0c5b25e!2s123%20Business%20Plaza%2C%20San%20Francisco%2C%20CA%2094105!5e0!3m2!1sen!2sus!4v1635794087842!5m2!1sen!2sus"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2877.3636353176384!2d-106.95847492432995!3d44.79734337107025!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5335fabc2a655555%3A0x4a36f5f875d0e0f1!2s30%20N%20Gould%20St%2C%20Sheridan%2C%20WY%20380054%2C%20USA!5e0!3m2!1sen!2sin!4v1709355647435!5m2!1sen!2sin"
                     width="100%"
                     height="256"
                     style={{ border: 0, borderRadius: '12px' }}

@@ -6,20 +6,49 @@ import nodemailer from "nodemailer";
 
 // SMTP Configuration
 const createTransporter = () => {
-  return nodemailer.createTransporter({
-    host: process.env.SMTP_HOST || 'smtp.gmail.com',
-    port: parseInt(process.env.SMTP_PORT || '587'),
-    secure: false, // true for 465, false for other ports
+  return nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: parseInt(process.env.SMTP_PORT || '465'),
+    secure: true, // Required for Hostinger
     auth: {
       user: process.env.SMTP_USER,
       pass: process.env.SMTP_PASS,
     },
+    tls: {
+      rejectUnauthorized: false // Only if you encounter SSL issues
+    }
   });
 };
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  app.post("/api/contact", async (req, res) => {
+  // Add CORS headers
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+  });
+
+  app.use((req, res, next) => {
+    console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+    console.log('Request Body:', req.body);
+    next();
+  });
+
+  app.post("/api/submit-inquiry", async (req, res) => {
+    // Add content type header
+    res.header('Content-Type', 'application/json');
+    
     try {
+      console.log('Received contact form data:', req.body);
+      
+      if (!req.body) {
+        return res.status(400).json({ 
+          success: false, 
+          error: "No data received" 
+        });
+      }
+
       const validatedData = insertContactSchema.parse(req.body);
       const contact = await storage.createContactSubmission(validatedData);
 
@@ -87,17 +116,48 @@ export async function registerRoutes(app: Express): Promise<Server> {
         };
 
         try {
+          console.log('Attempting to send emails with config:', {
+            host: process.env.SMTP_HOST,
+            port: process.env.SMTP_PORT,
+            user: process.env.SMTP_USER,
+            // Don't log the password
+          });
+          
           await transporter.sendMail(companyEmailOptions);
+          console.log('Company email sent successfully');
+          
           await transporter.sendMail(userEmailOptions);
+          console.log('User email sent successfully');
         } catch (emailError) {
-          console.error('Email sending failed:', emailError);
+          console.error('Email sending failed:', {
+            error: emailError.message,
+            stack: emailError.stack,
+            code: emailError.code,
+            command: emailError.command
+          });
+        }
+          // Log detailed error information
+          if (emailError instanceof Error) {
+            console.error('Error details:', {
+              message: emailError.message,
+              stack: emailError.stack,
+            });
+          }
           // Don't fail the request if email fails
         }
       }
 
-      res.json({ success: true, contact });
+      return res.status(200).json({ 
+        success: true, 
+        message: "Contact form submitted successfully",
+        contact 
+      });
     } catch (error) {
-      res.status(400).json({ success: false, error: "Invalid contact data" });
+      console.error('Contact form error:', error);
+      return res.status(400).json({ 
+        success: false, 
+        error: error instanceof Error ? error.message : "Invalid contact data" 
+      });
     }
   });
 
