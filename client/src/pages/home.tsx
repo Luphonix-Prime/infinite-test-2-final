@@ -1,6 +1,7 @@
 import HeroSection from "@/components/hero-section";
 import { motion } from "framer-motion";
 import { Users, Target, Zap, Award, TrendingUp, Shield } from "lucide-react";
+import images2 from "@/assets/images/table.png"
 
 export default function Home() {
   return (
@@ -261,7 +262,7 @@ export default function Home() {
                     </div>
                     <div className="w-full h-24 rounded-full overflow-hidden border-2 border-[#FF006E]">
                       <img
-                        src="https://images.unsplash.com/photo-1553028826-f4804a6dfd3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&h=150"
+                        src={images2}
                         alt="Assessment process"
                         className="w-full h-full object-cover"
                       />

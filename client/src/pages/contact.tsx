@@ -300,7 +300,7 @@ Sheridan, WY 380054, United States
                     </div>
                     <div>
                       <p className="font-semibold">Email Address</p>
-                      <p className="text-gray-400">contact@infinitejobssolutions.com</p>
+                      <p className="text-gray-400">info@infinitejobssolutions.com</p>
                     </div>
                   </div>
 
